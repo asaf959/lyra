@@ -1,0 +1,223 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+html, body {
+  @apply bg-background text-foreground;
+  height: 100%;
+  overflow: hidden !important;
+  overscroll-behavior: none !important;
+  overscroll-behavior-y: none !important;
+  overscroll-behavior-x: none !important;
+  position: relative;
+  width: 100%;
+}
+
+#__next {
+  height: 100%;
+  overflow: hidden !important;
+  overscroll-behavior: none !important;
+  overscroll-behavior-y: none !important;
+  overscroll-behavior-x: none !important;
+  position: relative;
+}
+}
+
+/* Prevent scroll propagation between code editor and file explorer */
+.main-content-container {
+  overflow: hidden !important;
+  overscroll-behavior: none !important;
+  overscroll-behavior-y: none !important;
+  overscroll-behavior-x: none !important;
+  position: relative !important;
+  height: 100% !important;
+  max-height: 100% !important;
+}
+
+.code-editor-section {
+  overflow: hidden !important;
+  overscroll-behavior: none !important;
+  overscroll-behavior-y: none !important;
+  overscroll-behavior-x: none !important;
+  position: relative !important;
+  isolation: isolate !important;
+  contain: layout style paint !important;
+  height: 100% !important;
+  max-height: 100% !important;
+}
+
+.code-editor-scroll-container {
+  overscroll-behavior: contain !important;
+  overscroll-behavior-y: contain !important;
+  overscroll-behavior-x: none !important;
+  isolation: isolate !important;
+  position: relative !important;
+  height: 100% !important;
+  max-height: 100% !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  touch-action: pan-y !important;
+  scroll-behavior: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+  /* Prevent any scroll propagation */
+  contain: layout style paint !important;
+  will-change: scroll-position !important;
+}
+
+/* When code editor is active, lock everything else */
+body:has(.code-editor-scroll-container:hover),
+body:has(.code-editor-scroll-container:focus-within) {
+  overflow: hidden !important;
+}
+
+html:has(.code-editor-scroll-container:hover),
+html:has(.code-editor-scroll-container:focus-within) {
+  overflow: hidden !important;
+}
+
+/* Prevent any scroll on parent containers when code editor is scrolling */
+.code-editor-section:has(.code-editor-scroll-container:hover),
+.code-editor-section:has(.code-editor-scroll-container:focus-within) {
+  overflow: hidden !important;
+  overscroll-behavior: none !important;
+}
+
+.main-content-container:has(.code-editor-scroll-container:hover),
+.main-content-container:has(.code-editor-scroll-container:focus-within) {
+  overflow: hidden !important;
+  overscroll-behavior: none !important;
+}
+
+.file-explorer-section {
+  overflow: hidden !important;
+  overscroll-behavior: none !important;
+  overscroll-behavior-y: none !important;
+  overscroll-behavior-x: none !important;
+  position: relative !important;
+  isolation: isolate !important;
+  contain: layout style paint !important;
+  height: 100% !important;
+  max-height: 100% !important;
+  /* Prevent any scroll on this section */
+  touch-action: none !important;
+}
+
+.file-explorer-section * {
+  /* Prevent scroll chaining from children */
+  overscroll-behavior: none !important;
+}
+
+.file-explorer-section .file-explorer-scrollable {
+  /* Only allow scroll in the scrollable area */
+  overscroll-behavior: contain !important;
+  overscroll-behavior-y: contain !important;
+  touch-action: pan-y !important;
+}
+
+.file-explorer-container {
+  overflow: hidden !important;
+  overscroll-behavior: none !important;
+  overscroll-behavior-y: none !important;
+  overscroll-behavior-x: none !important;
+  height: 100% !important;
+  max-height: 100% !important;
+  touch-action: none !important;
+}
+
+.file-explorer-scrollable {
+  overscroll-behavior: contain !important;
+  overscroll-behavior-y: contain !important;
+  overscroll-behavior-x: none !important;
+  isolation: isolate !important;
+  position: relative !important;
+}
+
+.chat-panel-section {
+  overflow: hidden !important;
+  overscroll-behavior: none !important;
+  overscroll-behavior-y: none !important;
+  overscroll-behavior-x: none !important;
+  position: relative !important;
+  isolation: isolate !important;
+  contain: layout style paint !important;
+  height: 100% !important;
+  max-height: 100% !important;
+  touch-action: none !important;
+}
+
+.chat-panel-section * {
+  overscroll-behavior: none !important;
+}
+
+.chat-panel-section .chat-messages-scrollable {
+  overscroll-behavior: contain !important;
+  overscroll-behavior-y: contain !important;
+  touch-action: pan-y !important;
+}
+
+/* Fixed Footer - Only in main content area, not chat section */
+.fixed-footer {
+  position: fixed !important;
+  bottom: 0 !important;
+  z-index: 99999 !important;
+  background-color: #f9fafb !important;
+  border-top: 1px solid #e5e7eb !important;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
